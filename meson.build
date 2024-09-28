@@ -6,6 +6,8 @@ cc = meson.get_compiler('c')
 # use project version by default
 version = 'v'+meson.project_version()
 
+add_project_arguments('-fno-lto', language : 'c')
+
 add_global_arguments('-DCOMPFY_VERSION="'+version+'"', language: 'c')
 
 if get_option('buildtype') == 'release'

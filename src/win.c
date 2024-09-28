@@ -149,7 +149,7 @@ static void win_update_focused(session_t *ps, struct managed_win *w) {
 			w->focused = false;
 		}
 
-		if (ps, w, ps->o.focus_blacklist, NULL) {
+		if (c2_match(ps, w, ps->o.focus_blacklist, NULL)) {
 			log_warn("Focus exclude is deprecated. Please use either 'inactive-exclude' or 'active-exclude'");
 		}
 
@@ -1552,7 +1552,9 @@ static void win_determine_rounded_corners(session_t *ps, struct managed_win *w) 
 		w->corner_radius = 0;
 		log_debug("Not rounding corners for window %#010x", w->base.id);
 	} else if (c2_match(ps, w, ps->o.corner_rules, &val)) {
-		w->corner_radius = val;
+        if (val != NULL) {
+            w->corner_radius = *(int*)val;
+        }
 	} else {
 		w->corner_radius = ps->o.corner_radius;
 		log_debug("Rounding corners for window %#010x", w->base.id);

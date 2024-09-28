@@ -578,7 +578,8 @@ static inline bool glx_has_extension(Display *dpy, int screen, const char *ext) 
 }
 
 struct glxext_info glxext = {0};
-PFNGLXGETVIDEOSYNCSGIPROC glXGetVideoSyncSGI;
+typedef int (*glXGetVideoSyncSGIProc)(unsigned int *);
+glXGetVideoSyncSGIProc glXGetVideoSyncSGI;
 PFNGLXWAITVIDEOSYNCSGIPROC glXWaitVideoSyncSGI;
 PFNGLXGETSYNCVALUESOMLPROC glXGetSyncValuesOML;
 PFNGLXWAITFORMSCOMLPROC glXWaitForMscOML;
